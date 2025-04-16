@@ -24,6 +24,13 @@ const destinations = [
         image:
             'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/d6/c6/f8/caption.jpg?w=1400&h=1400&s=1&cx=989&cy=446&chk=v1_05762c604da56e26277e',
     },
+    {
+        title: 'Paris',
+        price: '$10k',
+        days: '7 Days Trip',
+        image:
+            'https://149990825.v2.pressablecdn.com/wp-content/uploads/2023/09/Paris1.jpg',
+    },
 ];
 
 const DestinationSection: React.FC = () => {

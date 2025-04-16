@@ -1,0 +1,102 @@
+@import "../../theme.scss";
+
+.subscribe-section {
+    background-color: #fff;
+    padding: 5rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.subscribe-card {
+    background: linear-gradient(120deg, #f0eeff, #e5e2ff);
+    border: none;
+    border-radius: 2rem;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.subscribe-text {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: $purple-navy;
+    margin-bottom: 2.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subscribe-form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .subscribe-input {
+        border-radius: 10px;
+        height: 48px;
+        padding: 0 1rem;
+        min-width: 300px;
+        border: 1px solid #ccc;
+        position: relative;
+        display: block;
+    }
+
+    .input-wrapper {
+        position: relative;
+        width: 100%;
+        min-height: 70px;
+    }
+
+    .error-message {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 0.85rem;
+        color: red;
+        height: 20px;
+    }
+
+    .subscribe-btn {
+        background: $orange;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 500;
+        margin-left: 3.5rem;
+        height: 48px;
+        margin-top: -23px;
+    }
+}
+
+.send-icon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: $purple;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+
+
+@media (max-width: 767px) {
+    .subscribe-form {
+        .subscribe-input {
+            min-width: 270px;
+        }
+
+        .subscribe-btn {
+            margin-top: 20px;
+            margin-left: 12px;
+        }
+    }
+}

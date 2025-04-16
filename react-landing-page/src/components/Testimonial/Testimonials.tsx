@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Testimonials.scss';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 
 const testimonials = [
@@ -26,6 +26,30 @@ const testimonials = [
         image: 'https://randomuser.me/api/portraits/women/65.jpg',
     },
 ];
+
+const testimonialIcons = [
+    {
+        id: 1,
+        icon: "axon-airlines.svg"
+    },
+    {
+        id: 2,
+        icon: "Jetstar-airways.png"
+    },
+    {
+        id: 3,
+        icon: "expedia.png"
+    },
+    {
+        id: 4,
+        icon: "qantas.png"
+    },
+    {
+        id: 5,
+        icon: "alitalia.png"
+    }
+
+]
 
 const Testimonials: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -79,6 +103,15 @@ const Testimonials: React.FC = () => {
                     </Button>
                 </div>
             </div>
+            <Container className="testimonials-icons mt-4">
+                <Row className="justify-content-center align-items-center g-3 flex-wrap">
+                    {testimonialIcons.map((icon) => (
+                        <Col key={icon.id}>
+                            <img src={icon.icon} alt="icon" className="testimonial-icon" />
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </div>
     );
 };

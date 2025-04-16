@@ -1,3 +1,5 @@
+@import "../../theme.scss";
+
 .book-trip {
     display: flex;
     justify-content: space-between;
@@ -169,7 +171,7 @@
                 h5 {
                     margin: 0 0 0.8rem;
                     font-size: 1.1rem;
-                    color: #14183e;
+                    color: $yankees-blue;
                 }
 
                 .progress-bar {
@@ -182,13 +184,13 @@
 
                     .progress {
                         height: 100%;
-                        background: #8a79ff;
+                        background: $violet;
                     }
                 }
 
                 .percent {
                     font-size: 0.8rem;
-                    color: #5e6282;
+                    color: $dark-electric-blue;
                     margin: 0;
                 }
             }

@@ -112,8 +112,8 @@ const BookTripSection = () => {
                         <p className="percent">{statusCard.progress}% completed</p>
 
                         <div className="progress-bar">
-                            <ProgressBar animated now={40} label={`${40}%`} />
-                            {/* <div className="progress" style={{ width: `${statusCard.progress}%` }}></div> */}
+                            {/* <ProgressBar animated now={40} label={`${40}%`} /> */}
+                            <div className="progress" style={{ width: `${statusCard.progress}%` }}></div>
                         </div>
                     </div>
                 </div>

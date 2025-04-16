@@ -1,3 +1,5 @@
+@import "../../theme.scss";
+
 .testimonial-container {
     padding: 4rem 2rem;
     display: flex;
@@ -85,7 +87,7 @@
             h5 {
                 margin-top: 1rem;
                 font-weight: 600;
-                color: #2c2e50;
+                color: $dark-slate-blue;
             }
 
             .location {
@@ -142,6 +144,21 @@
             }
         }
     }
+
+    .testimonial-icon {
+        height: 250px;
+        width: 200px;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            filter: none;
+            opacity: 1;
+        }
+    }
+
 }
 
 @media (max-width: 768px) {

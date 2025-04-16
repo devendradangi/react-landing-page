@@ -1,6 +1,8 @@
+@import '../../theme.scss';
+
 .travel-destination {
     .subheading {
-        color: #df6951;
+        color: $accent;
         font-size: 1.125rem;
         font-weight: 600;
         letter-spacing: 0.1em;
@@ -21,13 +23,13 @@
             h1 {
                 font-size: 2.5rem;
                 font-weight: 700;
-                color: #181e4b;
+                color: $navy-blue;
                 line-height: 1.2;
                 margin-bottom: 1.5rem;
             }
 
             .description {
-                color: #5e6282;
+                color: $dark-electric-blue;
                 font-size: 1rem;
                 line-height: 1.6;
                 max-width: 600px;
@@ -53,12 +55,12 @@
                 }
 
                 .primary-button {
-                    background-color: #f1a501;
+                    background-color: $golden-yellow;
                     color: white;
                     border: none;
 
                     &:hover {
-                        background-color: #e69500;
+                        background-color: $dark-yellow;
                         transform: translateY(-2px);
                     }
                 }
