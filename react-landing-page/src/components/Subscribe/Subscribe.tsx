@@ -4,6 +4,7 @@ import { FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 import { useFormik } from "formik";
 import emailjs from "@emailjs/browser";
 import "./Subscribe.scss";
+import { emailValidationSchema, initialEmailFormValues } from "./utility";
 
 const Subscribe = () => {
 
@@ -12,21 +13,10 @@ const Subscribe = () => {
 
     const formik = useFormik({
 
-        initialValues: { email: "" },
+        initialValues: initialEmailFormValues,
 
         // Here Validating Email
-        validate: (values) => {
-            const errors: any = {};
-            if (!values.email) {
-                errors.email = '* Please enter email';
-            } else if (
-                !/^[a-zA-Z0-9]+(\.[a-zA-Z0-9+]+)*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/i.test(values.email)
-            ) {
-                errors.email = '* Please enter valid email address';
-            }
-
-            return errors;
-        },
+        validationSchema: emailValidationSchema,
 
         // Form Submission
         onSubmit: (values, { resetForm }) => {
@@ -70,12 +60,12 @@ const Subscribe = () => {
                                                     type="email"
                                                     name="email"
                                                     placeholder="Your email"
-                                                    className={`subscribe-input ${formik.errors.email && formik.submitCount > 0 ? "is-invalid" : ""}`}
+                                                    className={`subscribe-input ${formik.touched.email && formik.errors.email ? "is-invalid" : ""}`}
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
                                                     value={formik.values.email}
                                                 />
-                                                {formik.errors.email && formik.submitCount > 0 && (
+                                                {formik.touched.email && formik.errors.email && (
                                                     <div className="error-message">
                                                         {formik.errors.email}
                                                     </div>

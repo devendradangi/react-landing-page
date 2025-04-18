@@ -1,7 +1,6 @@
-import React, { JSX } from 'react';
+import { JSX } from 'react';
 import { FaMapMarkedAlt, FaCreditCard, FaCar, FaHeart, FaLocationArrow } from 'react-icons/fa';
 import './BookTripSection.scss';
-import { ProgressBar } from 'react-bootstrap';
 
 interface BookingStep {
     id: number;

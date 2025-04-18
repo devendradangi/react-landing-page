@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button, Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
     return (
@@ -15,11 +16,14 @@ const Header: React.FC = () => {
                         <Nav.Link href="#hotels">Hotels</Nav.Link>
                         <Nav.Link href="#flights">Flights</Nav.Link>
                         <Nav.Link href="#booking">Booking</Nav.Link>
-                        <Nav.Link href="#login">Login</Nav.Link>
+                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
 
-                        <Button variant="outline-primary" className="ms-2">
-                            Sign Up
-                        </Button>
+                        <Link to="/signup">
+                            <Button className="ms-2 btn-btn-accent">
+                                Sign Up
+                            </Button>
+                        </Link>
+
                         <Dropdown className="ms-3">
                             <Dropdown.Toggle variant="secondary" id="dropdown-language">
                                 Language
