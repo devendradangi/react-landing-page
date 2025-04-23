@@ -1,11 +1,11 @@
-import BookTripSection from "../../components/BookTripSection/BookTripSection";
-import DestinationSection from "../../components/Destination/DestinationSection";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-import ServicesSection from "../../components/Service/ServiceSection";
-import Subscribe from "../../components/Subscribe/Subscribe";
-import Testimonials from "../../components/Testimonial/Testimonials";
-import TravelDestination from "../../components/TravelDestination/TravelDestination";
+import BookTripSection from "../../components/home/BookTrip/BookTripSection";
+import DestinationSection from "../../components/home/Destination/DestinationSection";
+import Footer from "../../components/home/Footer/Footer";
+import Header from "../../components/home/Header/Header";
+import ServicesSection from "../../components/home/Services/ServiceSection";
+import Subscribe from "../../components/home/Subscribe/Subscribe";
+import Testimonials from "../../components/home/Testimonials/Testimonials";
+import TravelDestination from "../../components/home/TravelDestination/TravelDestination";
 import "./Home.scss";
 
 const Home = () => {

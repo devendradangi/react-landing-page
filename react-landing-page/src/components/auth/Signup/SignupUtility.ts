@@ -1,5 +1,5 @@
 import * as Yup from "yup"
-import { AuthType } from "../../common";
+import { AuthType } from "../../../utils/utils";
 
 export const initialSignUpState = {
     firstName: "",
@@ -17,10 +17,12 @@ export const signUpValidationSchema = Yup.object().shape({
 });
 
 export interface SIGNUP {
+    id?: string,
     firstName: string,
     lastName: string,
     email: string,
-    password: string | number,
-    authType: string
+    password: string,
+    authType: string,
+    createdAt?: string,
 }
 

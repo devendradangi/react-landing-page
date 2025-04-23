@@ -1,0 +1,39 @@
+@import "../../../theme.scss";
+
+.custom-pagination {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+
+    button {
+        background-color: #f3f4f6;
+        border: 1px solid #d1d5db;
+        color: #111827;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover:not(:disabled) {
+            background-color: #e5e7eb;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &.active {
+            background-color: $primary;
+            border-color: $purple;
+            color: $navy-blue;
+        }
+    }
+}

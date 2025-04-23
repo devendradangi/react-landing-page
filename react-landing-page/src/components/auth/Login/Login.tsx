@@ -3,10 +3,13 @@ import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { initialLoginState, loginValidationSchema } from "./LoginUtility";
 import './Login.scss';
 import { Link, useNavigate } from "react-router-dom";
-import { AuthType, GOOGLE_AUTH_TYPE } from "../../common";
 import { useState } from "react";
-import CommonLoader from "../../Common/CommonLoader/CommonLoader";
-import GoogleAuthButton from "../../Common/GoogleAuthButton/GoogleAuthButton";
+import { loggedInUser } from "../../../services/user-services";
+import { showErrorToast, showSuccessToast } from "../../../utils/toast-utils";
+import CommonLoader from "../../common/CommonLoader/CommonLoader";
+import GoogleAuthButton from "../../common/GoogleAuthButton/GoogleAuthButton";
+import { AuthType, GOOGLE_AUTH_TYPE } from "../../../utils/utils";
+
 
 export const Login = () => {
 
@@ -18,22 +21,32 @@ export const Login = () => {
         initialValues: initialLoginState,
         validationSchema: loginValidationSchema,
 
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             if (formik.isValid) {
                 setLoading(true);
-                setTimeout(() => {
-                    console.log("Login Form Submitted", values);
+
+                const loginPayload = {
+                    email: values.email,
+                    password: values.password,
+                    authType: AuthType.MANUAL_REGISTRATION
+                };
+
+                try {
+                    await loggedInUser(loginPayload);
+                    showSuccessToast("Login successful");
+                    navigate("/dashboard");
+                } catch (error: any) {
+                    showErrorToast(error.message);
+                } finally {
                     setLoading(false);
-                    navigate("/home");
-                }, 3000);
+                }
             } else {
-                setLoading(false);
-                console.log("Form is not Valid", values);
+                showErrorToast("Please fill out all fields correctly.");
             }
         },
     });
 
-    const handleGoogleLogin = (userData: any) => {
+    const handleGoogleLogin = async (userData: any) => {
 
         setLoading(true);
         const loginPayload = {
@@ -42,11 +55,15 @@ export const Login = () => {
             authType: AuthType.GOOGLE_SSO
         };
 
-        setTimeout(() => {
-            console.log("Login Payload:", loginPayload);
+        try {
+            await loggedInUser(loginPayload);
+            showSuccessToast("Login successful with Google");
+            navigate("/dashboard");
+        } catch (error: any) {
+            showErrorToast(error.message);
+        } finally {
             setLoading(false);
-            navigate("/home");
-        }, 3000);
+        }
     }
 
     const handleGoogleError = (error: any) => {

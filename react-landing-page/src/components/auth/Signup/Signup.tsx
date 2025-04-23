@@ -4,10 +4,13 @@ import { initialSignUpState, signUpValidationSchema } from "./SignupUtility";
 import { useNavigate } from "react-router-dom";
 import "./Signup.scss";
 import { Link } from "react-router-dom";
-import { AuthType, GOOGLE_AUTH_TYPE } from "../../common";
 import { useState } from "react";
-import CommonLoader from "../../Common/CommonLoader/CommonLoader";
-import GoogleAuthButton from "../../Common/GoogleAuthButton/GoogleAuthButton";
+import { registerUser } from "../../../services/user-services";
+import { showErrorToast, showSuccessToast } from "../../../utils/toast-utils";
+import { AuthType, GOOGLE_AUTH_TYPE } from "../../../utils/utils";
+import CommonLoader from "../../common/CommonLoader/CommonLoader";
+import GoogleAuthButton from "../../common/GoogleAuthButton/GoogleAuthButton";
+
 
 export const SignUp = () => {
 
@@ -18,21 +21,29 @@ export const SignUp = () => {
     const formik = useFormik({
         initialValues: initialSignUpState,
         validationSchema: signUpValidationSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             if (formik.isValid) {
                 setLoading(true);
-                console.log(values);
-                setTimeout(() => {
-                    navigate("/home");
+                try {
+                    await registerUser({
+                        ...values,
+                    });
+                    showSuccessToast("Account created successfully");
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 1500);
+                } catch (err: any) {
+                    console.error("Signup Error:", err.message);
+                    showErrorToast(err.message);
+                } finally {
                     setLoading(false);
-                }, 3000);
-            } else {
-                console.log(values);
+                }
             }
         },
     });
 
-    const handleGoogleSignup = (userData: any) => {
+    const handleGoogleSignup = async (userData: any) => {
+        console.log(userData)
         setLoading(true);
         const signupPayload = {
             firstName: userData?.given_name,
@@ -41,12 +52,19 @@ export const SignUp = () => {
             password: userData?.sub,
             authType: AuthType.GOOGLE_SSO
         };
-        console.log("Signup Payload:", signupPayload);
-        setTimeout(() => {
-            navigate("/home");
+        try {
+            await registerUser(signupPayload);
             setLoading(false);
-        }, 3000);
-    }
+            showSuccessToast("Google account linked successfully");
+            setTimeout(() => {
+                navigate("/login");
+            }, 1500);
+        } catch (err: any) {
+            setLoading(false);
+            console.error("Google Signup Error:", err.message);
+            showErrorToast(err.message);
+        }
+    };
 
     const handleGoogleError = (error: any) => {
         console.error("Google Signup Error:", error);

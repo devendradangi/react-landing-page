@@ -1,9 +1,9 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import { FaGoogle } from "react-icons/fa";
-import { GOOGLE_AUTH_TYPE } from "../../common";
 import { FcGoogle } from "react-icons/fc";
+import { GOOGLE_AUTH_TYPE } from "../../../utils/utils";
+
 
 
 interface GoogleAuthButtonProps {
