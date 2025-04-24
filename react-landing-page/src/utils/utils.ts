@@ -18,4 +18,4 @@ export const GOOGLE_AUTH_TYPE = {
 
 export const PAGE_SIZE = 10;
 
-export const noImage = "/no_image.png"
+export const noImage = "/no_image.png";
