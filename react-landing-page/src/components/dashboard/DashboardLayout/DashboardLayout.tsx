@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Sidebar from './Sidebar';
-import DashboardHeader from './DashboardHeader';
-import "../../pages/Dashboard/DashboardPage.scss";
-import { showErrorToast, showSuccessToast } from '../../utils/toast-utils';
+import Sidebar from '../Sidebar/Sidebar';
+import DashboardHeader from '../DashboardHeader/DashboardHeader';
+import "../../../pages/Dashboard/DashboardPage.scss";
+import { showErrorToast, showSuccessToast } from '../../../utils/toast-utils';
 import { useNavigate, Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
@@ -25,7 +25,7 @@ const DashboardLayout = () => {
     const handleLogout = () => {
         logoutInProgress.current = true;
         localStorage.removeItem('loggedInUser');
-        showSuccessToast("Logged out successfully");
+        showSuccessToast("You have successfully logged out");
         setTimeout(() => {
             navigate('/login', { replace: true });
         }, 300);

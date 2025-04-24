@@ -1,8 +1,8 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import "../../pages/Dashboard/DashboardPage.scss";
-import { TbBrandProducthunt, TbChartBar, TbDashboard, TbHome, TbLogout2, TbShoppingCartX } from "react-icons/tb";
+import "../../../pages/Dashboard/DashboardPage.scss";
+import { TbChartBar, TbDashboard, TbHome, TbLogout2, TbShoppingCartX } from "react-icons/tb";
 
 
 const Sidebar: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
