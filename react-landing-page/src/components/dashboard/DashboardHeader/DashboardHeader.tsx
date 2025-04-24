@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import "../../pages/Dashboard/DashboardPage.scss"
+import "../../../pages/Dashboard/DashboardPage.scss"
+
 
 interface Props {
     name: string;

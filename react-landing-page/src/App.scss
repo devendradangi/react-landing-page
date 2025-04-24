@@ -1,5 +1,10 @@
 @import "./theme.scss";
 
+::selection {
+    color: $bg-white;
+    background: $bg-teal-green;
+}
+
 form label em {
     font-style: normal;
     color: $red;
@@ -19,4 +24,25 @@ form label em {
     font-weight: 700;
     color: $navy-blue;
     line-height: 1.2;
+}
+
+.btn-btn-secondary {
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    border: 1px solid #e6eaed !important;
+    color: $bg-muted-grey !important;
+    background-color: $bg-white !important;
+
+    &:hover {
+        background-color: $bg-muted-grey !important;
+        color: $bg-white !important;
+        border-color: $bg-muted-grey !important;
+    }
+}
+
+.card-title {
+    cursor: pointer !important;
+    color: #0091ae !important;
+    font-weight: 500 !important;
 }

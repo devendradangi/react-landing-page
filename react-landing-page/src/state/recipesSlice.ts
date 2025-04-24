@@ -4,12 +4,14 @@ interface RecipeState {
     recipes: any[];
     totalCount: number;
     currentPage: number;
+    searchQuery: string;
 }
 
 const initialState: RecipeState = {
     recipes: [],
     totalCount: 0,
     currentPage: 1,
+    searchQuery: '',
 };
 
 const recipesSlice = createSlice({
@@ -28,9 +30,18 @@ const recipesSlice = createSlice({
         setCurrentPage(state, action: PayloadAction<number>) {
             state.currentPage = action.payload;
         },
+
+        setSearchQuery: (state, action: PayloadAction<string>) => {
+            state.searchQuery = action.payload;
+        },
     },
 });
 
-export const { setRecipes, setTotalCount, setCurrentPage } = recipesSlice.actions;
+export const {
+    setRecipes,
+    setTotalCount,
+    setCurrentPage,
+    setSearchQuery
+} = recipesSlice.actions;
 
 export default recipesSlice.reducer;

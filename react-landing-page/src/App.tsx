@@ -7,11 +7,13 @@ import { OAUTH_CLIENT } from './utils/utils';
 import { Toaster } from 'react-hot-toast';
 import Login from './components/auth/Login/Login';
 import SignUp from './components/auth/Signup/Signup';
-import HomePage from './components/dashboard/HomePage';
-import DashboardLayout from './components/dashboard/DashboardLayout';
-import AnalyticsPage from './components/dashboard/AnalyticsPage';
-import Dashboard from './components/dashboard/Dashboard';
-import Recipes from './components/dashboard/Recipes';
+import HomePage from './components/dashboard/HomePage/HomePage';
+import DashboardLayout from './components/dashboard/DashboardLayout/DashboardLayout';
+import AnalyticsPage from './components/dashboard/Analytics/AnalyticsPage';
+import Dashboard from './components/dashboard/Dashboard/Dashboard';
+import RecipesList from './components/dashboard/Recipes/RecipesList/RecipesList';
+import RecipeDetails from './components/dashboard/Recipes/RecipeDetails/RecipeDetails';
+
 
 
 
@@ -33,7 +35,8 @@ function App() {
                 <Route index element={<Dashboard />} />
                 <Route path='home' element={<HomePage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />
-                <Route path="recipes" element={<Recipes />} />
+                <Route path="recipes" element={<RecipesList />} />
+                <Route path="recipes/:id" element={<RecipeDetails />} />
               </Route>
             </Routes>
           </div>

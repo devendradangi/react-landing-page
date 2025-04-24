@@ -1,23 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchDataByDummyJSON } from "../../services/recipes-service";
-import { Badge, Card, Col, Container, Row } from "react-bootstrap";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import PaginationComponent from "../common/Pagination/PaginationComponent";
-import { getPaginationData } from "../../common";
+import { fetchDataByDummyJSON } from "../../../../services/recipes-service";
+import { Badge, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { FaStar, FaStarHalfAlt, FaRegStar, FaRegSadTear } from "react-icons/fa";
+import PaginationComponent from "../../../common/Pagination/PaginationComponent";
+import { getPaginationData } from "../../../../common";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setRecipes, setTotalCount } from "../../state/recipesSlice";
-import { RootState } from "../../state/store";
-import CommonLoader from "../common/CommonLoader/CommonLoader";
+import { setCurrentPage, setRecipes, setSearchQuery, setTotalCount } from "../../../../state/recipesSlice";
+import { RootState } from "../../../../state/store";
+import CommonLoader from "../../../common/CommonLoader/CommonLoader";
+import { useNavigate } from "react-router-dom";
+import NoDataFound from "../../../common/NoDataFound/NoDataFound";
+import { noImage } from "../../../../utils/utils";
 
-const Recipes = () => {
+const RecipesList = () => {
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
-    const { recipes, totalCount, currentPage } = useSelector(
+    const { recipes, totalCount, currentPage, searchQuery } = useSelector(
         (state: RootState) => state.recipes
     );
 
     const [loading, setLoading] = useState<boolean>(false);
+
+    const [filteredRecipes, setFilteredRecipes] = useState<any[]>([]);
 
     const limit = 12;
 
@@ -54,6 +60,18 @@ const Recipes = () => {
         }
     }, [currentPage]);
 
+    useEffect(() => {
+        if (searchQuery?.trim()) {
+            const filtered = recipes?.filter((recipe: any) =>
+                recipe?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+            );
+            setFilteredRecipes(filtered);
+        } else {
+            setFilteredRecipes(recipes);
+        }
+    }, [recipes, searchQuery]);
+
+
     const renderStars = (rating: number) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -82,23 +100,37 @@ const Recipes = () => {
         );
     };
 
+
     return (
         <Container className="py-4">
             <h1 className="mb-4">Recipes</h1>
+            <div className="d-flex justify-content-end align-items-end mr-auto">
+                <Form.Group controlId="searchRecipes" className="mb-4">
+                    <Form.Control
+                        type="text"
+                        placeholder="Search by recipe name..."
+                        value={searchQuery}
+                        onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+                    />
+                </Form.Group>
+            </div>
             <CommonLoader loadingState={loading} message="Fetching Recipes..." />
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-                {recipes.map((recipe: any) => (
+                {filteredRecipes.map((recipe: any) => (
                     <Col key={recipe.id}>
                         <Card className="h-100 shadow-sm">
                             <Card.Img
                                 variant="top"
-                                src={recipe?.image}
+                                src={recipe?.image || noImage}
                                 alt={recipe?.name}
                                 style={{ height: "200px", objectFit: "cover" }}
                                 loading="lazy"
                             />
                             <Card.Body>
-                                <Card.Title>{recipe?.name}</Card.Title>
+                                <Card.Title
+                                    onClick={() => navigate(`/dashboard/recipes/${recipe.id}`, { state: recipe })}>
+                                    {recipe?.name}
+                                </Card.Title>
 
                                 <div>{renderStars(recipe?.rating)}</div>
 
@@ -120,13 +152,20 @@ const Recipes = () => {
                 ))}
             </Row>
 
+            {!loading && filteredRecipes?.length === 0 && (
+                <NoDataFound
+                    icon={<>{FaRegSadTear({})}</>}
+                    title="No Recipes"
+                />
+            )}
+
             <PaginationComponent
                 limit={limit}
-                totalCount={totalCount}
+                totalCount={searchQuery ? filteredRecipes.length : totalCount}
                 onPageChange={(page) => fetchRecipes(page)}
             />
         </Container>
     );
 };
 
-export default Recipes;
+export default RecipesList;
